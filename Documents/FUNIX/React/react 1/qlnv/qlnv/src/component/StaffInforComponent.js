@@ -1,5 +1,6 @@
 import dateFormat from "dateformat";
-const StaffInfor = (staff) => {
+const StaffInfor = ({ staff }) => {
+  console.log("day la staff: ", staff);
   return (
     <div className="col-6 infor">
       <li>Họ và tên: {staff.name}</li>
@@ -9,7 +10,7 @@ const StaffInfor = (staff) => {
         Chức vụ:
         {parseFloat(staff.salaryScale) > 1 ? "Quản lý" : "Nhân viên"}
       </li>
-      <li>Phòng ban: {staff.department.name}</li>
+      {/* <li>Phòng ban: {staff.department.name}</li> */}
       <li>Ngày nghỉ còn lại: {staff.annualLeave}</li>
       <li>Ngày đi làm thêm: {staff.overTime}</li>
     </div>

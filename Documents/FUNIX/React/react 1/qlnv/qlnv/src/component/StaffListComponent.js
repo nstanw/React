@@ -2,10 +2,14 @@ import React from "react";
 
 const StaffList = ({ staffs, onClick }) => {
   return (
-    <div className="staff-list row" onClick={onClick}>
+    <div className="staff-list row">
       {staffs.map((staff) => (
         <>
-          <div className="col-4">
+          <div
+            className="col-4"
+            key={staff.id}
+            onClick={() => onClick(staff.id)}
+          >
             <h3>{staff.name}</h3>
             <img id="img-profile-tag" src={staff.image} alt={staff.name}></img>
           </div>
