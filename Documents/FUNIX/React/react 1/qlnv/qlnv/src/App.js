@@ -1,15 +1,16 @@
 import "./App.css";
-import { STAFFS, ROLE, DEPARTMENTS } from "./shared/staff";
-import { Component } from "react";
 import NavComponent from "./component/NavComponent";
-import StaffList from "./component/StaffListComponent";
-import React from "react";
+import React, { useState } from "react";
+import { STAFFS } from "./shared/staff";
 
 function App() {
+  //hoook
+  const [staff, setStaff] = useState(STAFFS);
+  const listStaff = () => {};
   return (
     <div className="container">
       <NavComponent />
-      {/* <StaffList /> */}
+      {/* <StaffList staff={listStaff} /> */}
     </div>
   );
 }
