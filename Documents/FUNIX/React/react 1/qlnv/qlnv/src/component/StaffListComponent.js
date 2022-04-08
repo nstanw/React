@@ -1,14 +1,17 @@
 import React from "react";
-import dateFormat from "dateformat";
 
-const StaffList = ({ staffs }) => {
+const StaffList = ({ staffs, onClick }) => {
   return (
-    <div>
-      <div className="staff-list">
-        {staffs.map((staff) => (
-          <h3 key={staff.id}>{staff.name}</h3>
-        ))}
-      </div>
+    <div className="staff-list row" onClick={onClick}>
+      {staffs.map((staff) => (
+        <>
+          <div className="col-4">
+            <h3>{staff.name}</h3>
+            <img id="img-profile-tag" src={staff.image} alt={staff.name}></img>
+          </div>
+        </>
+      ))}
+
       {/* <div>
       <div className="row">
         <div className="col-3">
