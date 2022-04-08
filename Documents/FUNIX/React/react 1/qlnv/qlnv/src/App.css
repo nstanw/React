@@ -7,9 +7,15 @@ div {
 }
 
 .infor {
-  margin-top: 5%;
   font-size: 1.5rem;
 }
 li {
   list-style-type: none;
+}
+#name-info {
+  text-align: center;
+}
+#p-footer {
+  background-color: rgb(133, 133, 133);
+  text-align: center;
 }

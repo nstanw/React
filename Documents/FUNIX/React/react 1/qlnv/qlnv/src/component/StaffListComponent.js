@@ -6,12 +6,12 @@ const StaffList = ({ staffs, onClick }) => {
       {staffs.map((staff) => (
         <>
           <div
-            className="col-4"
+            className="col-2"
             key={staff.id}
             onClick={() => onClick(staff.id)}
           >
-            <h3>{staff.name}</h3>
             <img id="img-profile-tag" src={staff.image} alt={staff.name}></img>
+            <h5>{staff.name}</h5>
           </div>
         </>
       ))}

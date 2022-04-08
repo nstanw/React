@@ -2,42 +2,23 @@ import React, { Component } from "react";
 
 const NavComponent = () => {
   return (
-    <div className="">
-      <h1>STAFF MANAGER</h1>
-      <div className="row">
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Dropdown button
-          </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a className="dropdown-item" href="#">
-              Action
-            </a>
-            <a className="dropdown-item" href="#">
-              Another action
-            </a>
-            <a className="dropdown-item" href="#">
-              Something else here
-            </a>
-          </div>
+    <div className="row">
+      <div className="col-4">
+        <h1>STAFF MANAGER</h1>
+      </div>
+      <div className="col-8">
+        <div>
+          <select id="col">
+            <option value="2">Mobile - 2 cột</option>
+            <option value="4">Tablet - 4 cột</option>
+            <option value="6" selected>
+              PC - 6 cột
+            </option>
+          </select>
         </div>
         <div>
-          <span>Reset</span>
-        </div>
-        <div>
-          <input id="ip-col"></input>
-          <button id="btn-go">Go</button>
-        </div>
-        <div>
-          <label htmlFor="search">Search:</label>
-          <input id="search"></input>
+          <input id="input-col"></input>
+          <button id="btn-go">Sort</button>
         </div>
       </div>
     </div>
