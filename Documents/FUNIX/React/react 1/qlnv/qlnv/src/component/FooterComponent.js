@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <div>
+    <footer>
       <p id="p-footer">@Bản quyền thuộc về Ngô Sỹ Tuấn Anh</p>
-    </div>
+    </footer>
   );
 };
 export default Footer;
