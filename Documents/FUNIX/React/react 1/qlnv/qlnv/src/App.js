@@ -10,7 +10,7 @@ function App() {
   const [staffs, setStaff] = useState(STAFFS);
   const [infor, setInfor] = useState();
   const [showInfor, setShowInfor] = useState(false);
-  const [col, setCol] = useState(2);
+  const [col, setCol] = useState("");
 
   const clickInfo = (id) => {
     console.log(id);

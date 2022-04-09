@@ -18,9 +18,9 @@ const NavComponent = ({ onChangeCol }) => {
         </div>
         <div className="col-3" id="selec">
           <select id="colum" onChange={onChangeCol}>
-            <option value="6">Mobile - 2 cột</option>
-            <option value="3">Tablet - 4 cột</option>
-            <option value="2" selected>
+            <option value="col-6">Mobile - 2 cột</option>
+            <option value="col-3">Tablet - 4 cột</option>
+            <option value="col-2" selected>
               PC - 6 cột
             </option>
           </select>
