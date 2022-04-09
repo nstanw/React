@@ -6,7 +6,7 @@ const StaffList = ({ staffs, onClick, col }) => {
       {staffs.map((staff) => (
         <>
           <div
-            className={col !== "" ? col : `col-md-3 col-sm-4 col-lg-2`}
+            className={col !== "" ? col : `col-12 col-sm-6 col-xl-4`}
             key={staff.id}
             onClick={() => onClick(staff.id)}
           >

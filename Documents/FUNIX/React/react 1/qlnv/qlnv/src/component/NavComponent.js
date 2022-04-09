@@ -1,5 +1,3 @@
-import React, { Component } from "react";
-
 const NavComponent = ({ onChangeCol }) => {
   return (
     <div className="row navi">
