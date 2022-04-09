@@ -1,24 +1,29 @@
 import React, { Component } from "react";
 
-const NavComponent = () => {
+const NavComponent = ({ onChangeCol }) => {
   return (
-    <div className="row">
-      <div className="col-4">
-        <h1>STAFF MANAGER</h1>
+    <div className="row navi">
+      <div className="col-3">
+        <h5>STAFF MANAGER</h5>
       </div>
-      <div className="col-8">
-        <div>
-          <select id="col">
-            <option value="2">Mobile - 2 cột</option>
-            <option value="4">Tablet - 4 cột</option>
-            <option value="6" selected>
+      <div className="col-9 row" id="menu">
+        <div className="col-3">
+          <a href="#">Nhân viên</a>
+        </div>
+        <div className="col-3">
+          <a href="#">Phòng ban</a>
+        </div>
+        <div className="col-3">
+          <a href="#">Bảng lương</a>
+        </div>
+        <div className="col-3" id="selec">
+          <select id="colum" onChange={onChangeCol}>
+            <option value="6">Mobile - 2 cột</option>
+            <option value="3">Tablet - 4 cột</option>
+            <option value="2" selected>
               PC - 6 cột
             </option>
           </select>
-        </div>
-        <div>
-          <input id="input-col"></input>
-          <button id="btn-go">Sort</button>
         </div>
       </div>
     </div>

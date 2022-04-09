@@ -1,12 +1,12 @@
 import React from "react";
 
-const StaffList = ({ staffs, onClick }) => {
+const StaffList = ({ staffs, onClick, col }) => {
   return (
     <div className="staff-list row">
       {staffs.map((staff) => (
         <>
           <div
-            className="col-2"
+            className={`col-${col}`}
             key={staff.id}
             onClick={() => onClick(staff.id)}
           >

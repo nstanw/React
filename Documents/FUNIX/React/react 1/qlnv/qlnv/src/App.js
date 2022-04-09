@@ -10,6 +10,7 @@ function App() {
   const [staffs, setStaff] = useState(STAFFS);
   const [infor, setInfor] = useState();
   const [showInfor, setShowInfor] = useState(false);
+  const [col, setCol] = useState(2);
 
   const clickInfo = (id) => {
     console.log(id);
@@ -23,11 +24,14 @@ function App() {
     }
   };
 
-  const col = () => {};
-
+  const handleCol = () => {
+    let colum = document.getElementById("colum").value;
+    console.log(colum);
+    setCol(colum);
+  };
   return (
-    <div className="container">
-      <NavComponent />
+    <div className="container total">
+      <NavComponent onChangeCol={handleCol} />
       {showInfor && <StaffInfor staff={infor} />}
       <StaffList staffs={staffs} onClick={clickInfo} col={col} />
       <Footer />
