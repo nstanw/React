@@ -3,6 +3,7 @@ import { Component } from "react";
 import Main from "./components/MainComponet";
 import { DISHES } from "./shared/dishes";
 import Menu from "./components/MenuComponents";
+import { BrowserRouter } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -13,10 +14,11 @@ class App extends Component {
   }
   render() {
     return (
+      < BrowserRouter>
       <div>
-        {/* <Main /> */}
-        <Menu dishes={this.state.dishes} />
+         <Main />  
       </div>
+      </BrowserRouter>
     );
   }
 }
