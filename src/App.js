@@ -14,10 +14,11 @@ class App extends Component {
   }
   render() {
     return (
-      < BrowserRouter>
-      <div>
-         <Main />  
-      </div>
+      <BrowserRouter>
+        <div>
+          <>ahhi</>
+          <Main />
+        </div>
       </BrowserRouter>
     );
   }
