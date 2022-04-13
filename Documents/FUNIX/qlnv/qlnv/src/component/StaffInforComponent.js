@@ -2,13 +2,10 @@ import dateFormat from "dateformat";
 const StaffInfor = ({ staff }) => {
   return (
     <div className="row" id="div-infor">
-      <div className="col-sm-12 col-12" id="name-info">
-        <h3 id="title-staff">{staff.name}</h3>
-      </div>
-      <div className="col-sm-12 col-md-6 col-12">
+      <div className="col-lg-3 col-md-4 col-12">
         <img id="img-profile-tag" src={staff.image} alt={staff.name}></img>
       </div>
-      <div className="col-sm-12 col-md-6 col-12 infor">
+      <div className="col-lg-9 col-md-8 col-12 infor">
         <li>Họ và tên: {staff.name}</li>
         <li>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</li>
         <li>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</li>

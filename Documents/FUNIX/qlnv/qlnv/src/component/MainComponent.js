@@ -32,6 +32,7 @@ function Main() {
   return (
     <div className="container total">
       <NavComponent onChangeCol={handleCol} />
+
       {showInfor && <StaffInfor staff={infor} />}
       <StaffList staffs={staffs} onClick={clickInfo} col={col} />
       <Footer />
