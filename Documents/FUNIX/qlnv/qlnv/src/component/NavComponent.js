@@ -15,7 +15,7 @@ const NavComponent = ({ onChangeCol }) => {
           <Link to="/departments">Phòng ban</Link>
         </div>
         <div className="col-3">
-          <Link to="salaryscale" href="#">
+          <Link to="/salaryscale" href="#">
             Bảng lương
           </Link>
         </div>

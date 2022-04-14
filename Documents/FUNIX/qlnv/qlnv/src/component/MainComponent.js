@@ -7,6 +7,7 @@ import StaffList from "./StaffListComponent";
 import { Routes, Route, useParams } from "react-router-dom";
 import { DEPARTMENTS } from "../shared/staff";
 import Department from "./Department";
+import SalaryScale from "./SalaryScaleComponent";
 
 function Main() {
   //hoook
@@ -62,6 +63,7 @@ function Main() {
           path="/departments"
           element={<Department departments={departments} />}
         />
+        <Route path="/salaryscale" element={<SalaryScale staffs={staffs} />} />
         {/* <Route  path="/salaryscale" element={< />}> */}
       </Routes>
 
