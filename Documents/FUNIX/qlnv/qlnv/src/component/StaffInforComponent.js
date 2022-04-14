@@ -1,4 +1,5 @@
 import dateFormat from "dateformat";
+import { Link } from "react-router-dom";
 const StaffInfor = ({ staff }) => {
   return (
     <div className="row" id="div-infor">

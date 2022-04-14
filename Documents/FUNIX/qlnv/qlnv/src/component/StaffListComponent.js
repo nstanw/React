@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const StaffList = ({ staffs, onClick, col }) => {
   return (
@@ -10,8 +11,14 @@ const StaffList = ({ staffs, onClick, col }) => {
             key={staff.id}
             onClick={() => onClick(staff.id)}
           >
-            <img id="img-profile-tag" src={staff.image} alt={staff.name}></img>
-            <h5 id="name-staff">{staff.name}</h5>
+            <Link to={`/staffs/${staff.id}`}>
+              <img
+                id="img-profile-tag"
+                src={staff.image}
+                alt={staff.name}
+              ></img>
+              <h5 id="name-staff">{staff.name}</h5>
+            </Link>
           </div>
         </>
       ))}

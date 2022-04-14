@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
 const NavComponent = ({ onChangeCol }) => {
   return (
     <div className="row navi">
       <div className="col-3">
-        <h5>STAFF MANAGER</h5>
+        <Link to="/">
+          <h5>STAFF MANAGER</h5>
+        </Link>
       </div>
       <div className="col-9 row" id="menu">
         <div className="col-3">
-          <a href="#">Nhân viên</a>
+          <Link to="/staffs">Nhân viên</Link>
         </div>
         <div className="col-3">
           <a href="#">Phòng ban</a>
