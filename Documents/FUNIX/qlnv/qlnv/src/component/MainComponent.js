@@ -4,7 +4,9 @@ import NavComponent from "./NavComponent";
 import StaffInfor from "./StaffInforComponent";
 import Footer from "./FooterComponent";
 import StaffList from "./StaffListComponent";
-import { Routes, Switch, Route, Redirect, useParams } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
+import { DEPARTMENTS } from "../shared/staff";
+import Department from "./Department";
 
 function Main() {
   //hoook
@@ -12,9 +14,9 @@ function Main() {
   const [infor, setInfor] = useState();
   const [showInfor, setShowInfor] = useState(false);
   const [col, setCol] = useState("");
+  const [departments, setDepartment] = useState(DEPARTMENTS);
 
   const clickInfo = (id) => {
-    // console.log(id);
     if (id != null) {
       const info = staffs.filter((staff) => staff.id === id);
       setInfor(info[0]);
@@ -56,8 +58,13 @@ function Main() {
           element={<StaffList staffs={staffs} onClick={clickInfo} col={col} />}
         />
         <Route exact path="/staffs/:staffId" element={<StaffWithId />} />
+        <Route
+          path="/departments"
+          element={<Department departments={departments} />}
+        />
+        {/* <Route  path="/salaryscale" element={< />}> */}
       </Routes>
-      {/* <StaffList staffs={staffs} onClick={clickInfo} col={col} /> */}
+
       <Footer />
     </div>
   );

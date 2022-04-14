@@ -3,26 +3,31 @@ export const DEPARTMENTS = [
     id: "Dept01",
     name: "Sale",
     numberOfStaff: 1,
+    image: "/assets/images/sale.jpg",
   },
   {
     id: "Dept02",
     name: "HR",
     numberOfStaff: 3,
+    image: "/assets/images/hr.jpg",
   },
   {
     id: "Dept03",
     name: "Marketing",
     numberOfStaff: 2,
+    image: "/assets/images/marketing.jpg",
   },
   {
     id: "Dept04",
     name: "IT",
     numberOfStaff: 1,
+    image: "/assets/images/it.jpg",
   },
   {
     id: "Dept05",
     name: "Finance",
     numberOfStaff: 11,
+    image: "/assets/images/finance.jpg",
   },
 ];
 export const ROLE = {

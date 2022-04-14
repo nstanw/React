@@ -85,3 +85,10 @@ footer {
   text-align: center;
   font-size: 12px;
 }
+.breadcrumb {
+  background-color: rgba(255, 255, 255, 0);
+}
+.card {
+  background-color: rgb(94, 155, 38);
+  color:rgb(255, 255, 255)
+}

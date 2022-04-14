@@ -12,10 +12,12 @@ const NavComponent = ({ onChangeCol }) => {
           <Link to="/staffs">Nhân viên</Link>
         </div>
         <div className="col-3">
-          <a href="#">Phòng ban</a>
+          <Link to="/departments">Phòng ban</Link>
         </div>
         <div className="col-3">
-          <a href="#">Bảng lương</a>
+          <Link to="salaryscale" href="#">
+            Bảng lương
+          </Link>
         </div>
         <div className="col-3" id="selec">
           <select id="colum" onChange={onChangeCol}>
