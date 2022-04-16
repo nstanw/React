@@ -1,5 +1,5 @@
-import { Card, CardTitle, CardText } from "reactstrap";
-
+import { Card, CardTitle, CardText, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { Link} from 'react-router-dom'
 // tính lương nhân viên
 const vnd = (salaryScale, overTime) => {
   let luong = salaryScale * 3000000 + overTime * (200000 / 8);
@@ -9,6 +9,11 @@ const vnd = (salaryScale, overTime) => {
 const SalaryScale = ({ staffs }) => {
   return (
     <div className="row">
+           <Breadcrumb className="col-12">
+        <BreadcrumbItem>
+          <Link to={"/departments"}>Departments</Link>
+        </BreadcrumbItem>  
+      </Breadcrumb>
       {staffs.map((staff) => (
         <div className="col-12 col-md-6 col-lg-4">
           <Card>
