@@ -45,6 +45,12 @@ function Main() {
     );
   };
 
+  const searchName = () =>{
+    
+    const inputName = document.getElementById('search-name').value;
+    setStaff(staffs.filter(staff => staff.name.includes(inputName)));
+  
+  }
 
   return (
     <div className="container ">
@@ -53,11 +59,11 @@ function Main() {
       <Routes>
         <Route
           path="/"
-          element={<StaffList staffs={staffs} onClick={clickInfo} col={col} />}
+          element={<StaffList staffs={staffs} onClick={clickInfo} col={col} searchName={searchName} />}
         />
         <Route
           path="/staffs"
-          element={<StaffList staffs={staffs} onClick={clickInfo} col={col} />}
+          element={<StaffList staffs={staffs} onClick={clickInfo} col={col} searchName={searchName} />}
         />
         <Route exact path="/staffs/:staffId" element={<StaffWithId />} />
         <Route
