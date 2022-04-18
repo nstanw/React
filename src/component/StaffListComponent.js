@@ -21,7 +21,8 @@ const StaffList = ({ staffs, onClick, col }) => {
         <div className="col-12">
 
         <select id="sort-staff-prop" className="col-6">
-          <option></option>
+          <option value=''>Phòng Ban</option>
+          <option value=''>Chức vụ</option>      
         </select>
 
         <input onChange={(e)=>handleSearchName(e.target.value).toLowerCase()} id="search-name" className="col-6" placeholder="enter name....">
