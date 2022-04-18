@@ -20,12 +20,10 @@ const NavComponent = ({ onChangeCol }) => {
           </Link>
         </div>
         <div className="col-3" id="selec">
-          <select id="colum" onChange={onChangeCol}>
+          <select id="colum" onChange={onChangeCol} defaultValue={"col-2"}>
             <option value="col-6">Mobile - 2 cột</option>
             <option value="col-3">Tablet - 4 cột</option>
-            <option value="col-2" selected>
-              PC - 6 cột
-            </option>
+            <option value="col-2">PC - 6 cột</option>
           </select>
         </div>
       </div>

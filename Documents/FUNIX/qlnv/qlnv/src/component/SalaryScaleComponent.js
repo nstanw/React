@@ -25,16 +25,17 @@ const SalaryScale = ({ staffs, selectChage }) => {
           </BreadcrumbItem>
         </Breadcrumb>
 
-        <select onChange={selectChage} id="selectSalary">
+        <select onChange={selectChage} id="selectSalary" defaultValue={"id"}>
           <option value="id">sắp xếp: mã nhân viên</option>
           <option value="id-down">Mã nhân viên cao đến thấp</option>
+
           <option value="">Lương từ cao đến thấp</option>
           <option value="">Lương từ thấp đến cao</option>
         </select>
       </div>
       {true &&
         staffs.map((staff) => (
-          <div className="col-12 col-md-6 col-lg-4">
+          <div className="col-12 col-md-6 col-lg-4" key={staff.id}>
             <Card>
               <CardTitle>{staff.name}</CardTitle>
               <CardText>Mã nhân viên: {staff.id}</CardText>

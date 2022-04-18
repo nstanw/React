@@ -13,7 +13,7 @@ const Department = ({ departments }) => {
         </BreadcrumbItem>
       </Breadcrumb>
       {departments.map((department) => (
-        <div className="col-12 col-md-6 col-lg-4">
+        <div className="col-12 col-md-6 col-lg-4" key={department.id}>
           <Card>
             <CardImg src={department.image} />
             <CardTitle>{department.name}</CardTitle>

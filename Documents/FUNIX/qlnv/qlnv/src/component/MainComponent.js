@@ -51,8 +51,14 @@ function Main() {
     if (inputValue === "id-down") {
       const arrSort = staffs.sort((a, b) => b.id - a.id);
       console.log(arrSort);
-      return setStaff(arrSort);
+      setStaff(arrSort);
       console.log("staff:", staffs);
+    }
+    if (inputValue === "id") {
+      const arrSort = staffs.sort((a, b) => a.id - b.id);
+      console.log(arrSort);
+      setStaff(arrSort);
+      console.log("staff id:", staffs);
     }
   };
 
