@@ -44,9 +44,20 @@ function Main() {
       />
     );
   };
+  // salary sort
+  const selectChage = () => {
+    let inputValue = document.getElementById("selectSalary").value;
+    console.log(inputValue);
+    if (inputValue === "id-down") {
+      const arrSort = staffs.sort((a, b) => b.id - a.id);
+      console.log(arrSort);
+      return setStaff(arrSort);
+      console.log("staff:", staffs);
+    }
+  };
 
   return (
-    <div className="container total">
+    <div className="container ">
       <NavComponent onChangeCol={handleCol} />
       {/* {showInfor && <StaffInfor staff={infor} />} */}
       <Routes>
@@ -63,7 +74,10 @@ function Main() {
           path="/departments"
           element={<Department departments={departments} />}
         />
-        <Route path="/salaryscale" element={<SalaryScale staffs={staffs} />} />
+        <Route
+          path="/salaryscale"
+          element={<SalaryScale staffs={staffs} selectChage={selectChage} />}
+        />
         {/* <Route  path="/salaryscale" element={< />}> */}
       </Routes>
 

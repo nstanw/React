@@ -1,13 +1,16 @@
 import { Card, CardTitle, CardText, CardImg } from "reactstrap";
-import { Breadcrumb, BreadcrumbItem} from 'reactstrap'
-import {Link }from 'react-router-dom'
+import { Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { Link } from "react-router-dom";
 const Department = ({ departments }) => {
   return (
     <div className="row department">
       <Breadcrumb className="col-12">
         <BreadcrumbItem>
+          <Link to={"/"}>Home</Link>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
           <Link to={"/departments"}>Departments</Link>
-        </BreadcrumbItem>  
+        </BreadcrumbItem>
       </Breadcrumb>
       {departments.map((department) => (
         <div className="col-12 col-md-6 col-lg-4">

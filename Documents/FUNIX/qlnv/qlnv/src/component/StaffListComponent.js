@@ -1,16 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Breadcrumb, BreadcrumbItem} from 'reactstrap'
+import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 const StaffList = ({ staffs, onClick, col }) => {
   return (
     <>
       <div className="staff-list row">
-      <Breadcrumb className="col-12">
-        <BreadcrumbItem>
-          <Link to={"/staffs"}>Home</Link>
-        </BreadcrumbItem>  
-      </Breadcrumb>
+        <Breadcrumb className="col-12">
+          <BreadcrumbItem>
+            <Link to={"/"}>Home</Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <Link to={"/staffs"}>Staffs</Link>
+          </BreadcrumbItem>
+        </Breadcrumb>
         {staffs.map((staff) => (
           <>
             <div

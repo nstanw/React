@@ -3,7 +3,7 @@
   
 }
 body {
-  background-image: linear-gradient(120deg, rgb(221, 90, 221), rgba(102, 238, 24, 0.842));
+  background-color: rgb(221, 90, 221);
   font-family: 'Montserrat', sans-serif;
  
 }
@@ -91,4 +91,16 @@ footer {
 .card {
   background-color: rgb(94, 155, 38);
   color:rgb(255, 255, 255)
+}
+.department {
+  border: 1px #f0f0f0 solid;
+  width: 95%;
+  margin: auto;
+  margin-top: 10px;
+}
+.salary {
+  border: 1px #f0f0f0 solid;
+  width: 95%;
+  margin: auto;
+  margin-top: 10px;
 }
