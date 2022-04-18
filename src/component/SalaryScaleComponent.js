@@ -16,14 +16,15 @@ const vnd = (salaryScale, overTime) => {
 };
 const arrSalary = STAFFS;
 
-const arrSortSalary = arrSalary.map(salary =>{
-  salary.luong = vnd(salary.salaryScale, salary.overTime);
-  return [...salary]
+const arrSortSalary = arrSalary.map(salary => {
+  let luong = vnd(salary.salaryScale, salary.overTime);
+   return salary = {...salary, salaryVnd: parseInt(luong)}
+
 }) 
-console.log(arrSortSalary);
+console.log('luong',arrSortSalary);
 const SalaryScale = () => {
   //hook
-  const [salarys , setSalary] = useState(STAFFS)
+  const [salarys , setSalary] = useState(arrSortSalary)
  //onchange
  const handleChage = () => {
     let selectValue = document.getElementById('selectSalary').value;
@@ -41,14 +42,17 @@ const SalaryScale = () => {
        setSalary(arrSortES6);
     }
     if( selectValue === 'salaryUptoDown'){
-
-      const arr = [...salarys]
-      const arrSort =  salarys.sort((a,b) => (b.id - a.id))
+      console.log('enter salaryUptoDown')
+      const arrSort =  salarys.sort((a,b) => (b.salaryVnd - a.salaryVnd))
       const arrSortES6 = [...arrSort];
        setSalary(arrSortES6);
     }
-
-
+    if( selectValue === 'salaryDowntoUp'){
+      console.log('enter salaryDowntoUp')
+      const arrSort =  salarys.sort((a,b) => (a.salaryVnd - b.salaryVnd))
+      const arrSortES6 = [...arrSort];
+       setSalary(arrSortES6);
+    }
  }
   return (
     <div className="row salary">
@@ -80,7 +84,7 @@ const SalaryScale = () => {
               <CardText>Hệ số lương: {staff.salaryScale}</CardText>
               <CardText>Số giờ làm thêm: {staff.overTime}</CardText>
               <CardText>
-                Lương: {vnd(staff.salaryScale, staff.overTime)}
+                Lương: {staff.salaryVnd}
               </CardText>
             </Card>
           </div>
