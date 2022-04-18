@@ -44,23 +44,7 @@ function Main() {
       />
     );
   };
-  // salary sort
-  const selectChage = () => {
-    let inputValue = document.getElementById("selectSalary").value;
-    console.log(inputValue);
-    if (inputValue === "id-down") {
-      const arrSort = staffs.sort((a, b) => b.id - a.id);
-      console.log(arrSort);
-      setStaff(arrSort);
-      console.log("staff:", staffs);
-    }
-    if (inputValue === "id") {
-      const arrSort = staffs.sort((a, b) => a.id - b.id);
-      console.log(arrSort);
-      setStaff(arrSort);
-      console.log("staff id:", staffs);
-    }
-  };
+
 
   return (
     <div className="container ">
@@ -82,9 +66,9 @@ function Main() {
         />
         <Route
           path="/salaryscale"
-          element={<SalaryScale staffs={staffs} selectChage={selectChage} />}
+          element={<SalaryScale/>}
         />
-        {/* <Route  path="/salaryscale" element={< />}> */}
+       
       </Routes>
 
       <Footer />
