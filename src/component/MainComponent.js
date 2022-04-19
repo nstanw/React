@@ -68,11 +68,11 @@ function Main() {
         <Route exact path="/staffs/:staffId" element={<StaffWithId />} />
         <Route
           path="/departments"
-          element={<Department departments={departments} />}
+          element={<Department departments={departments} col={col} />}
         />
         <Route
           path="/salaryscale"
-          element={<SalaryScale/>}
+          element={<SalaryScale col={col}  />}
         />
        
       </Routes>
