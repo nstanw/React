@@ -19,13 +19,16 @@ const StaffList = ({ staffs, onClick, col }) => {
             <Link to={"/staffs"}>Staffs</Link>
           </BreadcrumbItem>
         </Breadcrumb>
-        <div className="col-12">
+        <div className="col-12 row">
+          <div className="col-6" id="button-sort">
+            <label>Sắp xếp theo</label>
           <Link to="/SortDepartment">
             <button>Phòng ban</button>
           </Link>
           <Link to="/SortOverTime">
-            <button>OverTime</button>
+            <button>Best OverTime</button>
           </Link>
+          </div>
           <input
             onChange={(e) => handleSearchName(e.target.value).toLowerCase()}
             id="search-name"

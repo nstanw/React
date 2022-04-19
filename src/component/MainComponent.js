@@ -48,43 +48,22 @@ function Main() {
 
   const StaffWithDepartment = () => {
     return (
-      <div className="row">
-        <h3 className="col-12 row ">Phòng Sale</h3>
-        <div className="col-12">
-          <SortDepartment
-            staffs={staffs.filter((staff) => staff.department.name === "Sale")}
-          />
-        </div>
-        <h3 className="col-12 row">Phòng IT</h3>
-        <div >
-          <SortDepartment
-            staffs={staffs.filter((staff) => staff.department.name === "IT")}
-          />
-        </div>
-        <h3 className="col-12 row">Phòng Marketing</h3>
-        <div className="col-6 col-md-4 col-lg-2"> 
+      <>     
         <SortDepartment
-          staffs={staffs.filter(
-            (staff) => staff.department.name === "Marketing"
-          )}
+          staffs={staffs}
         />
-        </div>
-        <h3 className="col-12 row">Phòng HR</h3>
-        <div className="col-6 col-md-4 col-lg-2"> 
-        <SortDepartment
-          staffs={staffs.filter((staff) => staff.department.name === "HR")}
-        />
-        </div>
-      </div>
+      </>
     );
   };
-const SortOverTime = () => {
-  return (
-    <>
-      <SortStaffOverTime staffs={staffs.sort((a,b) => (b.overTime - a.overTime))}/>
-    </>
-  )
-}
+  const SortOverTime = () => {
+    return (
+      <>
+        <SortStaffOverTime
+          staffs={staffs.sort((a, b) => b.overTime - a.overTime)}
+        />
+      </>
+    );
+  };
   return (
     <div className="container ">
       <NavComponent onChangeCol={handleCol} />
