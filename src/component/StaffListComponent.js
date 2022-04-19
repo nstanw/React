@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 const StaffList = ({ staffs, onClick, col }) => {
-  const [staffSearch, setSearch] = useState(staffs)
+  const [staffSearch, setSearch] = useState(staffs);
   const handleSearchName = (searchText) =>
-  (setSearch(staffs.filter(staff => staff.name.toLowerCase().includes(searchText))))
+    setSearch(
+      staffs.filter((staff) => staff.name.toLowerCase().includes(searchText))
+    );
   return (
     <>
       <div className="staff-list row">
-
         <Breadcrumb className="col-12">
           <BreadcrumbItem>
             <Link to={"/"}>Home</Link>
@@ -19,15 +20,18 @@ const StaffList = ({ staffs, onClick, col }) => {
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="col-12">
-
-        <select id="sort-staff-prop" className="col-6">
-          <option value=''>Phòng Ban</option>
-          <option value=''>Chức vụ</option>      
-        </select>
-
-        <input onChange={(e)=>handleSearchName(e.target.value).toLowerCase()} id="search-name" className="col-6" placeholder="enter name....">
-        </input>
-
+          <Link to="/SortDepartment">
+            <button>Phòng ban</button>
+          </Link>
+          <Link to="/SortOverTime">
+            <button>OverTime</button>
+          </Link>
+          <input
+            onChange={(e) => handleSearchName(e.target.value).toLowerCase()}
+            id="search-name"
+            className="col-6"
+            placeholder="enter name...."
+          ></input>
         </div>
         {staffSearch.map((staff) => (
           <>
