@@ -20,19 +20,20 @@ const StaffList = ({ staffs, onClick, col }) => {
           </BreadcrumbItem>
         </Breadcrumb>
         <div className="col-12 row">
-          <div className="col-6" id="button-sort">
-            <label>Sắp xếp theo</label>
-          <Link to="/SortDepartment">
-            <button>Phòng ban</button>
-          </Link>
-          <Link to="/SortOverTime">
-            <button>Best OverTime</button>
-          </Link>
+          <div className="col-6 col-xs-12" id="button-sort">
+            <label className="col- col-xs-12">Sắp xếp theo:</label>
+            <Link to="/SortDepartment">
+              <button className="col- col-xs-12">Phòng ban</button>
+            </Link>
+            <Link to="/SortOverTime">
+              <button className="col- col-xs-12">OverTime</button>
+            </Link>
           </div>
           <input
+            className="col-6"
             onChange={(e) => handleSearchName(e.target.value).toLowerCase()}
             id="search-name"
-            className="col-6"
+            
             placeholder="enter name...."
           ></input>
         </div>
