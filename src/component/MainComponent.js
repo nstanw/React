@@ -67,7 +67,6 @@ function Main() {
   return (
     <div className="container ">
       <NavComponent onChangeCol={handleCol} />
-      {/* {showInfor && <StaffInfor staff={infor} />} */}
       <Routes>
         <Route
           path="/"
@@ -83,8 +82,8 @@ function Main() {
           element={<Department departments={departments} col={col} />}
         />
         <Route path="/salaryscale" element={<SalaryScale col={col} />} />
-        <Route path="/SortDepartment" element={<StaffWithDepartment />} />
-        <Route path="/SortOverTime" element={<SortOverTime />} />
+        <Route path="/SortDepartment" element={<StaffWithDepartment col={col} />} />
+        <Route path="/SortOverTime" element={<SortOverTime col={col} />} />
       </Routes>
 
       <Footer />

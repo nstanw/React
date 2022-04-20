@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Card, CardImg, CardHeader, CardText } from "reactstrap";
 import { Link } from "react-router-dom";
-const SortStaffOverTime = ({ staffs }) => {
+const SortStaffOverTime = ({ staffs, col }) => {
   return (
     <div id="sort-overtime">
       <Breadcrumb className="col-12">
