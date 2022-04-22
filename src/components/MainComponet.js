@@ -52,7 +52,7 @@ class Main extends Component {
     };
     return (
       <div className="App">
-        {/* <ContactComponent /> */}
+        <ContactComponent />
         <Header />
         <Switch>
           <Route path="/home" component={HomePage} />
