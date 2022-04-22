@@ -12,7 +12,6 @@ import Contact from "./ContactComponent";
 import { COMMENTS } from "../shared/comments";
 import { PROMOTIONS } from "../shared/promotions";
 import { LEADERS } from "../shared/leaders";
-import ContactComponent from "./ContactComponent ";
 
 class Main extends Component {
   constructor(props) {
@@ -52,7 +51,6 @@ class Main extends Component {
     };
     return (
       <div className="App">
-        <ContactComponent />
         <Header />
         <Switch>
           <Route path="/home" component={HomePage} />

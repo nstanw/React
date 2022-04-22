@@ -3,9 +3,18 @@ import {
   Navbar,
   NavbarBrand,
   NavbarToggler,
+  Jumbotron,
+  Navbarbrand,
   Collapse,
   NavItem,
-  Jumbotron,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  FormGroup,
+  Input,
+  Label,
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import React, { Component } from "react";
@@ -17,7 +26,23 @@ class Header extends Component {
     this.toggleNav = this.toggleNav.bind(this);
     this.state = {
       isNavOpen: false,
+      isModalOpen: false,
     };
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(event) {
+    console.log("click");
+    this.toggleModal();
+    alert(
+      `username: ${this.username.value} Password: ${this.password.value} Rememvber: ${this.remember.checked}`
+    );
+    event.preventDefault();
+  }
+
+  toggleModal() {
+    this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
   toggleNav() {
@@ -29,6 +54,46 @@ class Header extends Component {
   render() {
     return (
       <div>
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+          <ModalBody>
+            <Form onSubmit={this.handleLogin}>
+              <FormGroup>
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  type="text"
+                  name="username"
+                  id="username"
+                  innerRef={(input) => (this.username = input)}
+                ></Input>
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="password">password</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="password"
+                  innerRef={(input) => (this.password = input)}
+                ></Input>
+              </FormGroup>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    name="remember"
+                    innerRef={(input) => (this.remember = input)}
+                  ></Input>
+                  Remember me
+                </Label>
+              </FormGroup>
+              <FormGroup>
+                <Button type="submit" value="submit" color="primary">
+                  Login
+                </Button>
+              </FormGroup>
+            </Form>
+          </ModalBody>
+        </Modal>
         <Navbar dark expand="md">
           <div className="container">
             <NavbarToggler onClick={this.toggleNav} />
@@ -41,7 +106,7 @@ class Header extends Component {
               />
             </NavbarBrand>
             <Collapse isOpen={this.state.isNavOpen} navbar>
-              <Nav navbar>
+              <Nav className="ml-auto" navbar>
                 <NavItem>
                   <NavLink className="nav-link" to="/home">
                     <span className="fa fa-home fa-lg"></span> Home
@@ -63,6 +128,11 @@ class Header extends Component {
                     Us
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <Button outline onClick={this.toggleModal}>
+                    <span className="fa fa-sign-in fa-lg"></span>
+                  </Button>
+                </NavItem>
               </Nav>
             </Collapse>
           </div>
@@ -72,7 +142,11 @@ class Header extends Component {
             <div className="row row-header">
               <div className="col-12 col-sm-6">
                 <h1>Ristorante con Fusion</h1>
-                <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                <p>
+                  We take inspiration from the World's best cuisines, and create
+                  a unique fusion experience. Our lipsmacking creations will
+                  tickle your culinary senses!
+                </p>
               </div>
             </div>
           </div>
