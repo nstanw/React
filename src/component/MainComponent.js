@@ -48,10 +48,8 @@ function Main() {
 
   const StaffWithDepartment = () => {
     return (
-      <>     
-        <SortDepartment
-          staffs={staffs}
-        />
+      <>
+        <SortDepartment staffs={staffs} />
       </>
     );
   };
@@ -64,6 +62,7 @@ function Main() {
       </>
     );
   };
+
   return (
     <div className="container ">
       <NavComponent onChangeCol={handleCol} />
@@ -82,7 +81,10 @@ function Main() {
           element={<Department departments={departments} col={col} />}
         />
         <Route path="/salaryscale" element={<SalaryScale col={col} />} />
-        <Route path="/SortDepartment" element={<StaffWithDepartment col={col} />} />
+        <Route
+          path="/SortDepartment"
+          element={<StaffWithDepartment col={col} />}
+        />
         <Route path="/SortOverTime" element={<SortOverTime col={col} />} />
       </Routes>
 

@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Breadcrumb, BreadcrumbItem } from "reactstrap";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  Form,
+  FormGroup,
+  Row,
+  Col,
+  Label,
+} from "reactstrap";
 
 const StaffList = ({ staffs, onClick, col }) => {
   const [staffSearch, setSearch] = useState(staffs);
-  const handleSearchName = (searchText) =>
-    setSearch(
-      staffs.filter((staff) => staff.name.toLowerCase().includes(searchText))
-    );
+  const [isOpenModal, setOpenModal] = useState(false);
+
+  const handleSearch = () => {
+    const val = document.getElementById("search-name").value.toLowerCase();
+    setSearch(staffs.filter((staff) => staff.name.toLowerCase().includes(val)));
+  };
+
+  const toggleModal = () => {
+    console.log("click");
+    setOpenModal(!isOpenModal);
+  };
+
   return (
     <>
       <div className="staff-list row">
@@ -29,13 +49,139 @@ const StaffList = ({ staffs, onClick, col }) => {
               <button className="col- col-xs-12">OverTime</button>
             </Link>
           </div>
-          <input
-            className="col-6"
-            onChange={(e) => handleSearchName(e.target.value).toLowerCase()}
-            id="search-name"
-            
-            placeholder="enter name...."
-          ></input>
+          <div className="col-6">
+            <input
+              className="col-5"
+              // onChange={(e) => handleSearchName(e.target.value).toLowerCase()}
+              id="search-name"
+              placeholder="enter name...."
+            ></input>
+            <Button className="col-4" onClick={handleSearch}>
+              search
+            </Button>
+            <Button className="col-3" onClick={toggleModal}>
+              add
+            </Button>
+          </div>
+
+          <Modal isOpen={isOpenModal} toggle={toggleModal}>
+            <ModalHeader>Thêm nhân viên</ModalHeader>
+            <ModalBody>
+              <Form className="form-group">
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label htmlFor="name">Tên</Label>
+                    </Col>
+                    <Col>
+                      <input
+                        id="name"
+                        name="name"
+                        placeholder="Nhập tên của bạn"
+                        className="form-control"
+                      ></input>
+                    </Col>
+                  </Row>
+                </FormGroup>
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label htmlFor="doB">Ngày sinh</Label>
+                    </Col>
+                    <Col>
+                      <input
+                        type="date"
+                        id="doB"
+                        name="doB"
+                        className="form-control"
+                      ></input>
+                    </Col>
+                  </Row>
+                </FormGroup>
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label htmlFor="startDate">Ngày vào công ty</Label>
+                    </Col>
+                    <Col>
+                      <input
+                        type="date"
+                        id="startDate"
+                        name="startDate"
+                        className="form-control"
+                      ></input>
+                    </Col>
+                  </Row>
+                </FormGroup>
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label htmlFor="department">Phòng ban</Label>
+                    </Col>
+                    <Col>
+                      <select
+                        id="department"
+                        name="department"
+                        className="form-control"
+                      >
+                        <option>Sale</option>
+                        <option>IT</option>
+                        <option>HR</option>
+                        <option>Marketing</option>
+                        <option>Finance</option>
+                      </select>
+                    </Col>
+                  </Row>
+                </FormGroup>
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label htmlFor="salary">Hệ số lương</Label>
+                    </Col>
+                    <Col>
+                      <input
+                        id="salary"
+                        name="salary"
+                        placeholder=""
+                        className="form-control"
+                      ></input>
+                    </Col>
+                  </Row>
+                </FormGroup>
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label htmlFor="overTime">Số ngày nghỉ còn lại</Label>
+                    </Col>
+                    <Col>
+                      <input
+                        id="annualLeave"
+                        name="annualLeave"
+                        placeholder=""
+                        className="form-control"
+                      ></input>
+                    </Col>
+                  </Row>
+                </FormGroup>
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label htmlFor="overTime">Số ngày đã làm thêm</Label>
+                    </Col>
+                    <Col>
+                      <input
+                        id="overTime"
+                        name="overTime"
+                        placeholder=""
+                        className="form-control"
+                      ></input>
+                    </Col>
+                  </Row>
+                </FormGroup>
+                <Button color="primary">Thêm</Button>
+              </Form>
+            </ModalBody>
+          </Modal>
         </div>
         {staffSearch.map((staff) => (
           <>
