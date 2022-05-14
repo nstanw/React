@@ -4,17 +4,15 @@ import { COMMENTS } from "../../shared/comments";
 const initialState = {
   comments: COMMENTS,
 };
-
+// e ket noi lai voi a e nhe
 //createSlice Comment
 export const commentSlice = createSlice({
-  name: "comment",
+  name: "commentName",
   initialState,
   reducers: {
     addComment: (state , action) => {
-      console.log("initialState Slice", initialState);
-      console.log("concat", state.comments.concat(action.payload));
-
-      return (state = state.comments.concat(action.payload));
+        console.log('action', action)
+       state.comments =  state.comments.concat(action.payload);
     },
   },
 });

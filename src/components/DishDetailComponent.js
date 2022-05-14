@@ -44,6 +44,8 @@ function CommentForm() {
 
   })
 
+  console.log('stateComments', stateComments)
+
   const handleSubmitComment = (e, values) => {
     e.preventDefault();
 
