@@ -3,9 +3,7 @@ import React from "react";
 import { Component } from "react";
 import Main from "./components/MainComponet";
 import { DISHES } from "./shared/dishes";
-import Menu from "./components/MenuComponents";
 import { BrowserRouter } from "react-router-dom";
-
 
 class App extends Component {
   constructor(props) {

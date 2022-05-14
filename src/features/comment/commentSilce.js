@@ -11,7 +11,7 @@ export const commentSlice = createSlice({
   initialState,
   reducers: {
     addComment: (state , action) => {
-        console.log('action', action)
+        console.log('state',  state.comments)
        state.comments =  state.comments.concat(action.payload);
     },
   },

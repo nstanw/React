@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardImg,
@@ -36,24 +36,23 @@ function CommentForm() {
   const Dispatch = useDispatch();
   const stateComments = useSelector((state) => state.addComment.comments);
   const [postComment, setPostComment] = useState({
-    date:"",
-    author:"",
-    id:"",
-    comment:"",
-    rating:"",
+    date: "",
+    author: "",
+    id: "",
+    comment: "",
+    rating: "",
+  });
 
-  })
-
-  console.log('stateComments', stateComments)
+  console.log("stateComments", stateComments);
 
   const handleSubmitComment = (e, values) => {
     e.preventDefault();
 
-     postComment.date = new Date().toISOString();
-     postComment.author = values.yourname;
-     postComment.id = stateComments.length;
-     postComment.comment = values.comment;
-     postComment.rating = values.rating;
+    postComment.date = new Date().toISOString();
+    postComment.author = values.yourname;
+    postComment.id = stateComments.length;
+    postComment.comment = values.comment;
+    postComment.rating = values.rating;
     //  dishId = 0;
 
     // const newComment = { date, id, author, comment, rating };
@@ -150,7 +149,6 @@ function RenderComments() {
       <h4>Comment</h4>
       <ul>
         {stateComment.map((comment) => {
-          console.log("map comment:", comment);
           return (
             <div key={comment.id}>
               <li>

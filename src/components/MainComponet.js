@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar, NavbarBrand } from "reactstrap";
 import Menu from "./MenuComponents";
 import { DISHES } from "../shared/dishes";
 import { Component } from "react";

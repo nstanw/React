@@ -3,8 +3,6 @@ import {
   Navbar,
   NavbarBrand,
   NavbarToggler,
-  Jumbotron,
-  Navbarbrand,
   Collapse,
   NavItem,
   Button,
