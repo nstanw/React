@@ -20,6 +20,10 @@ import {
 } from "reactstrap";
 import { Control, Errors, LocalForm } from "react-redux-form";
 import { Link } from "react-router-dom";
+import { COMMENTS } from "../shared/comments";
+import { useSelector, useDispatch } from "react-redux";
+import { addComment } from "../features/comment/commentSilce";
+
 
 function RenderDish({ dish }) {
   return (
@@ -34,6 +38,25 @@ function RenderDish({ dish }) {
 }
 
 function CommentForm() {
+  const Dispatch = useDispatch();
+const stateComments = useSelector((state) => state.addComment.comments);
+ 
+
+  const handleSubmitComment = (values) => {
+  
+    const date = new Date().toISOString();
+    const author = values.yourname;
+    const id = stateComments.length;
+    const comment = values.comment;
+    const rating = values.rating;
+    const dishId= 0
+    
+    const newComment = {date, id, author, comment, rating, dishId };
+    console.log("comment form submit", newComment);
+
+    Dispatch(addComment(newComment));
+  };
+
   const required = (val) => val && val.length;
   const maxLength = (len) => (val) => !val || val.length <= len;
   const minLength = (len) => (val) => val && val.length >= len;
@@ -49,9 +72,9 @@ function CommentForm() {
         <span className="fa fa-comment fa-lg">Write comment</span>
       </Button>
       <Modal isOpen={isModalOpen} toggle={toggleModal}>
-        <ModalHeader>Submit Commit</ModalHeader>
+        <ModalHeader>Submit Comment</ModalHeader>
         <ModalBody>
-          <LocalForm>
+          <LocalForm onSubmit={(values) => handleSubmitComment(values)}>
             <Row className="form-group">
               <Label htmlFor="rating">Rating</Label>
               <Control.select
@@ -113,17 +136,33 @@ function CommentForm() {
     </div>
   );
 }
-function RenderComments({ dish }) {
+function RenderComments() {
+  const stateComment = useSelector((state) => state.addComment.comments);
+  console.log("comment in state in store...", stateComment);
   return (
     <div>
-      <Card>
-        <CardImg top src={dish.image} alt={dish.name} />
-
-        <CardBody>
-          <CardTitle>{dish.name}</CardTitle>
-          <CardText>{dish.description}</CardText>
-        </CardBody>
-      </Card>
+      <h4>Comment</h4>
+      <ul>
+        {stateComment.map((comment) => {
+          return (
+            <div key={comment.id}>
+              <li>
+                <p>{comment.comment}</p>
+                <p>Rating: {comment.rating}</p>
+                <p>--{comment.author}</p>
+                <p>
+                  {" "}
+                  {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  }).format(new Date(Date.parse(comment.date)))}
+                </p>
+              </li>
+            </div>
+          );
+        })}
+      </ul>
     </div>
   );
 }
@@ -150,8 +189,8 @@ const DishDetail = (props) => {
             <RenderDish dish={props.dish} />
           </div>
           <div className="col-12 col-md-5 m-1">
+            {<RenderComments />}
             <CommentForm />
-            {/* <RenderComments dish={props.comments} /> */}
           </div>
         </div>
       </div>
