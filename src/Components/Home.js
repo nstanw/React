@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
   CardImg,
@@ -8,6 +8,8 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import { getDishesThunk } from "../features/mainSlice";
+import Loading from "./Loading";
 
 function RenderCard({ item }) {
   return (
@@ -25,18 +27,24 @@ function RenderCard({ item }) {
 }
 
 function Home() {
-const selectShares = useSelector(state => state.main)
-console.log(selectShares)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDishesThunk());
+  }, []);
+  
+    const selectShares = useSelector((state) => state.main);
 
-const dish = selectShares.dishes.filter((dish) => dish.featured)[0];
-const promotion = selectShares.promotions.filter((dish) => dish.featured)[0];
-const leader = selectShares.leaders.filter((dish) => dish.featured)[0];
+    const isLoading = selectShares.status.isLoading;
+
+  const dish = selectShares.dishes.filter((dish) => dish.featured)[0];
+  const promotion = selectShares.promotions.filter((dish) => dish.featured)[0];
+  const leader = selectShares.leaders.filter((dish) => dish.featured)[0];
 
   return (
     <div className="container">
       <div className="row align-items-start">
         <div className="col-12 col-md m-1">
-          <RenderCard item={dish} />
+         {isLoading?  <Loading /> : <RenderCard item={dish} />}
         </div>
         <div className="col-12 col-md m-1">
           <RenderCard item={promotion} />

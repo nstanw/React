@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,10 +17,10 @@ const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-  //Dang lam do
+//Dang lam do
 const Contact = () => {
   const [info, setInfor] = useState({
-    fistname: "",
+    firstname: "",
     lastname: "",
     telnum: "",
     email: "",
@@ -34,12 +34,13 @@ const Contact = () => {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    setInfor({ ...info,[name]: value });
+    const newInfor = { ...info, [name]: value };
+    setInfor(newInfor);
   };
 
   const handleSubmit = (values) => {
-    console.log("Current State is: " + JSON.stringify(info));
-    alert("Current State is: " + JSON.stringify(info));
+    console.log("Current State is: " + JSON.stringify(values));
+    alert("Current State is: " + JSON.stringify(values));
     // event.preventDefault();
   };
 
@@ -117,11 +118,11 @@ const Contact = () => {
             <Col md={10}>
               <Control.text
                 model=".firstname"
-                onChange={handleInputChange}
                 id="firstname"
                 name="firstname"
                 placeholder="First Name"
                 className="form-control"
+                onChange={handleInputChange}
                 validators={{
                   required,
                   minLength: minLength(3),

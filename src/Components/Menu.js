@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardImg,
@@ -8,7 +8,9 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getDishesThunk } from "../features/mainSlice";
+import Loading from "./Loading";
 
 function RenderMenuItem({ dish }) {
   return (
@@ -24,12 +26,21 @@ function RenderMenuItem({ dish }) {
 }
 
 const Menu = (props) => {
-    
-    const selectShares = useSelector(state => state.main)
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDishesThunk());
+  }, []);
+  
+    const selectShares = useSelector((state) => state.main);
+
+    const isLoading = selectShares.status.isLoading;
+
+
     const menu = selectShares.dishes.map((dish) => {
     return (
       <div className="col-12 col-md-5 m-1" key={dish.id}>
-        <RenderMenuItem dish={dish} onClick={props.onClick} />
+        {isLoading? <Loading/> :<RenderMenuItem dish={dish} onClick={props.onClick} />}
       </div>
     );
   });
