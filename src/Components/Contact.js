@@ -22,10 +22,6 @@ const validEmail = (val) =>
 const Contact = () => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(actions.reset("feedback"));
-  // }, []);
-
   const [info, setInfor] = useState({
     firstname: "",
     lastname: "",
@@ -45,12 +41,14 @@ const Contact = () => {
     setInfor(newInfor);
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, e) => {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
+
     const resetform = dispatch(actions.reset("feedback"));
+
     console.log("resetform", resetform);
-    // event.preventDefault();
+    e.preventDefault();
   };
 
   return (
@@ -119,7 +117,10 @@ const Contact = () => {
         <h3>Send us your Feedback</h3>
       </div>
       <div className="col-12 col-md-9">
-        <Form model="feedback" onSubmit={(values) => handleSubmit(values)}>
+        <Form
+          model="feedback"
+          onSubmit={(values, e) => handleSubmit(values, e)}
+        >
           <Row className="form-group">
             <Label htmlFor="firstname" md={2}>
               First Name
