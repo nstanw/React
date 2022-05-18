@@ -15,6 +15,7 @@ function App() {
   useEffect(()=>{
     dispatch(getDishesThunk());
   },[])
+  
   return (
     <BrowserRouter>
       <div className="App">

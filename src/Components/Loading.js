@@ -1,7 +1,8 @@
 const Loading = ()=>{
 return(
     <div>
-        <h1>Loading....</h1>
+          <span className="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></span>
+        <p>Loading....</p>
     </div>
 )
 }
