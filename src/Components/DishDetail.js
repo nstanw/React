@@ -15,7 +15,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Control, Errors, LocalForm } from "react-redux-form";
+import { actions, Control, Errors, Form, LocalForm } from "react-redux-form";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addComment, getDishesThunk } from "../features/mainSlice";
@@ -63,11 +63,10 @@ function CommentForm() {
     rating: "",
   });
 
-  console.log("stateComments", stateComments);
+  const handleSubmitComment = (values, e) => {
+    Dispatch(actions.reset("feedback"));
 
-  const handleSubmitComment = (e, values) => {
-    e.preventDefault();
-
+    //update post commet
     postComment.date = new Date().toISOString();
     postComment.author = values.yourname;
     postComment.id = stateComments.length;
@@ -75,21 +74,24 @@ function CommentForm() {
     postComment.rating = values.rating;
     //  dishId = 0;
 
-    // const newComment = { date, id, author, comment, rating };
-    console.log("comment form submit", postComment);
+    //update state
     setPostComment(postComment);
+
+    //dispatch action add comment
     Dispatch(addComment(postComment));
-    setIsModalOpen(!isModalOpen);
+    //dispatch action to reset form
+    // setIsModalOpen(!isModalOpen);
+
+    e.preventDefault();
   };
 
   const required = (val) => val && val.length;
   const maxLength = (len) => (val) => !val || val.length <= len;
   const minLength = (len) => (val) => val && val.length >= len;
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const toggleModal = () => {
-    console.log("click");
     setIsModalOpen(!isModalOpen);
-    console.log(isModalOpen);
   };
   return (
     <div>
@@ -99,7 +101,10 @@ function CommentForm() {
       <Modal isOpen={isModalOpen} toggle={toggleModal}>
         <ModalHeader>Submit Comment</ModalHeader>
         <ModalBody>
-          <LocalForm onSubmit={(values, e) => handleSubmitComment(e, values)}>
+          <Form
+            model="feedback"
+            onSubmit={(values, e) => handleSubmitComment(values, e)}
+          >
             <Row className="form-group">
               <Label htmlFor="rating">Rating</Label>
               <Control.select
@@ -155,7 +160,7 @@ function CommentForm() {
                 </Button>
               </Col>
             </Row>
-          </LocalForm>
+          </Form>
         </ModalBody>
       </Modal>
     </div>
@@ -163,7 +168,7 @@ function CommentForm() {
 }
 function RenderComments() {
   const stateComment = useSelector((state) => state.main.comments);
-  console.log("comment in state in store render comment...", stateComment);
+
   return (
     <div>
       <h4>Comment</h4>

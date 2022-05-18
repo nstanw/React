@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,7 +8,9 @@ import {
   Label,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { LocalForm, Errors, Control } from "react-redux-form";
+import { Errors, Control, Form } from "react-redux-form";
+import { actions } from "react-redux-form";
+import { useDispatch } from "react-redux";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -17,8 +19,9 @@ const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-//Dang lam do
 const Contact = () => {
+  const dispatch = useDispatch();
+
   const [info, setInfor] = useState({
     firstname: "",
     lastname: "",
@@ -38,10 +41,14 @@ const Contact = () => {
     setInfor(newInfor);
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, e) => {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
-    // event.preventDefault();
+
+    const resetform = dispatch(actions.reset("feedback"));
+
+    console.log("resetform", resetform);
+    e.preventDefault();
   };
 
   return (
@@ -110,7 +117,10 @@ const Contact = () => {
         <h3>Send us your Feedback</h3>
       </div>
       <div className="col-12 col-md-9">
-        <LocalForm onSubmit={(values) => handleSubmit(values)}>
+        <Form
+          model="feedback"
+          onSubmit={(values, e) => handleSubmit(values, e)}
+        >
           <Row className="form-group">
             <Label htmlFor="firstname" md={2}>
               First Name
@@ -283,7 +293,7 @@ const Contact = () => {
               </Button>
             </Col>
           </Row>
-        </LocalForm>
+        </Form>
       </div>
     </div>
   );
