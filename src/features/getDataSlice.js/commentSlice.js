@@ -3,7 +3,7 @@ import { fetchByParams } from "../../userApi/fetchByParams";
 
 //crate thunk
 export const fetchComment = createAsyncThunk(
-  "GETCommentAPI/FETCHComment",
+  "GET_Comment_API/FETCH_Comment",
   async (params, thunkApi) => {
     const response = await fetchByParams(params);
     return response;
@@ -12,28 +12,32 @@ export const fetchComment = createAsyncThunk(
 
 //crate slice
 const getCommentApi = createSlice({
-  name: "GETCommentAPI",
+  name: "GET_CommentAPI",
   initialState: {
-    promotions: {
-      isLoading: false,
-      promotions: [],
+    comment: {
+      isLoading: true,
+      comment: [],
       errMess: null,
     },
   },
   reducers: {},
   extraReducers: {
     [fetchComment.fulfilled]: (state, action) => {
-      state.promotions = {
+      state.comment = {
         isLoading: false,
         errMess: null,
-        promotions: action.payload,
+        comment: {
+          ...action.payload,
+          id: action.payload.length,
+          date: new Date().toISOString(),
+        },
       };
     },
     [fetchComment.pending]: (state, action) => {
-      state.promotions = {
+      state.comment = {
         isLoading: true,
         errMess: null,
-        promotions: [],
+        comment: [],
       };
     },
     [fetchComment.rejected]: (state, action) => {

@@ -3,7 +3,7 @@ import { fetchByParams } from "../../userApi/fetchByParams";
 
 //crate thunk
 export const fetchDishes = createAsyncThunk(
-  "GETDATAAPI/FETCHDISHES",
+  "GET_DISHES_API/FETCH_DISHES",
   async (params, thunkApi) => {
     const response = await fetchByParams(params);
     return response;
@@ -12,7 +12,7 @@ export const fetchDishes = createAsyncThunk(
 
 //crate slice
 const getDishes = createSlice({
-  name: "GETDATAAPI",
+  name: "GET_DISHES_API",
   initialState: {
     dishes: {
       isLoading: false,

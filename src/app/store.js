@@ -7,12 +7,14 @@ import { combineReducers } from "redux";
 import getDishesReducer from "../features/getDataSlice.js/dishesSlice";
 import getLeaderReducer from "../features/getDataSlice.js/leaderSlice";
 import logger from "redux-logger";
+import getCommentApiReducer from "../features/getDataSlice.js/commentSlice";
 
 const rootReducer = combineReducers({
   main: mainReducer,
   getData: getDataApiReducer,
   getDishes: getDishesReducer,
   getLeader: getLeaderReducer,
+  getComment: getCommentApiReducer,
   ...createForms({
     feedback: InitialFeedback,
   }),

@@ -15,21 +15,26 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { actions, Control, Errors, Form, LocalForm } from "react-redux-form";
+import { actions, Control, Errors, Form } from "react-redux-form";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addComment, getDishesThunk } from "../features/mainSlice";
+import { addComment } from "../features/mainSlice";
 import Loading from "./Loading";
+import { fetchComment } from "../features/getDataSlice.js/commentSlice";
+import { fetchDishes } from "../features/getDataSlice.js/dishesSlice";
+import { baseUrl } from "../features/baseUrl";
 
 function RenderDish({ dish }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDishesThunk());
+    dispatch(fetchComment("comments"));
   }, []);
 
-  const selectShares = useSelector((state) => state.main);
+  console.log(dish);
 
-  const isLoading = selectShares.status.isLoading;
+  const selectComments = useSelector((state) => state.getComment.comment);
+
+  const isLoading = selectComments.comment.isLoading;
   //check loading
   if (isLoading) {
     //if true return loading
@@ -42,7 +47,7 @@ function RenderDish({ dish }) {
     //if fasle return dish
     return (
       <Card>
-        <CardImg top src={dish.image} alt={dish.name} />
+        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
         <CardBody>
           <CardTitle>{dish.name}</CardTitle>
           <CardText>{dish.description}</CardText>
@@ -198,9 +203,13 @@ function RenderComments() {
 }
 
 const DishDetail = () => {
-  //get dishes in store
-  const selecDishes = useSelector((state) => state.main.dishes);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchDishes("dishes"));
+  }, []);
 
+  //get dishes in store
+  const selecDishes = useSelector((state) => state.getDishes.dishes.dishes);
   //get params router
   const params = useParams();
   const dishId = parseInt(params.dishId, 10);

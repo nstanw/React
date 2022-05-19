@@ -8,16 +8,16 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import { baseUrl } from "../features/baseUrl";
 import { fetchDishes } from "../features/getDataSlice.js/dishesSlice";
 import { fetchLeader } from "../features/getDataSlice.js/leaderSlice";
 import { fetchData } from "../features/getDataSlice.js/promosSlice";
-import { getDishesThunk } from "../features/mainSlice";
 import Loading from "./Loading";
 
 function RenderCard({ item }) {
   return (
     <Card>
-      <CardImg src={`/assets/${item.image}`} alt={item.name} />
+      <CardImg src={baseUrl + item.image} alt={item.name} />
       <CardBody>
         <CardTitle>{item.name}</CardTitle>
         {item.designation ? (
@@ -32,7 +32,6 @@ function RenderCard({ item }) {
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDishesThunk());
     dispatch(fetchData("promotions"));
     dispatch(fetchDishes("dishes"));
     dispatch(fetchLeader("leaders"));

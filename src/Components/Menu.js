@@ -9,14 +9,15 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDishesThunk } from "../features/mainSlice";
 import Loading from "./Loading";
+import { fetchDishes } from "../features/getDataSlice.js/dishesSlice";
+import { baseUrl } from "../features/baseUrl";
 
 function RenderMenuItem({ dish }) {
   return (
     <Card>
       <Link to={`/menu/${dish.id}`}>
-        <CardImg width="100%" src={dish.image} alt={dish.name} />
+        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
         <CardImgOverlay>
           <CardTitle>{dish.name}</CardTitle>
         </CardImgOverlay>
@@ -26,21 +27,23 @@ function RenderMenuItem({ dish }) {
 }
 
 const Menu = (props) => {
-  
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDishesThunk());
+    dispatch(fetchDishes("dishes"));
   }, []);
-  
-    const selectShares = useSelector((state) => state.main);
 
-    const isLoading = selectShares.status.isLoading;
+  const selectDishes = useSelector((state) => state.getDishes.dishes);
 
+  const isLoading = selectDishes.dishes.isLoading;
 
-    const menu = selectShares.dishes.map((dish) => {
+  const menu = selectDishes.dishes.map((dish) => {
     return (
       <div className="col-12 col-md-5 m-1" key={dish.id}>
-        {isLoading? <Loading/> :<RenderMenuItem dish={dish} onClick={props.onClick} />}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <RenderMenuItem dish={dish} onClick={props.onClick} />
+        )}
       </div>
     );
   });
