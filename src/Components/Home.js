@@ -8,6 +8,8 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import { fetchDishes } from "../features/getDataSlice.js/dishesSlice";
+import { fetchLeader } from "../features/getDataSlice.js/leaderSlice";
 import { fetchData } from "../features/getDataSlice.js/promosSlice";
 import { getDishesThunk } from "../features/mainSlice";
 import Loading from "./Loading";
@@ -15,7 +17,7 @@ import Loading from "./Loading";
 function RenderCard({ item }) {
   return (
     <Card>
-      <CardImg src={item.image} alt={item.name} />
+      <CardImg src={`/assets/${item.image}`} alt={item.name} />
       <CardBody>
         <CardTitle>{item.name}</CardTitle>
         {item.designation ? (
@@ -31,7 +33,9 @@ function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDishesThunk());
-    dispatch(fetchData("dishes"));
+    dispatch(fetchData("promotions"));
+    dispatch(fetchDishes("dishes"));
+    dispatch(fetchLeader("leaders"));
   }, []);
 
   const selectShares = useSelector((state) => state.main);
@@ -39,11 +43,15 @@ function Home() {
   const isLoading = selectShares.status.isLoading;
 
   //selec state in json-server
-  const selectDishApi = useSelector((state) => state.getData);
-console.log(selectDishApi)
-  const dish = selectShares.dishes.filter((dish) => dish.featured)[0];
-  const promotion = selectShares.promotions.filter((dish) => dish.featured)[0];
-  const leader = selectShares.leaders.filter((dish) => dish.featured)[0];
+  const selectPromotions = useSelector(
+    (state) => state.getData.promotions.promotions
+  );
+  const selectDishes = useSelector((state) => state.getDishes.dishes.dishes);
+  const selectLeader = useSelector((state) => state.getLeader.leader.leader);
+
+  const dish = selectDishes.filter((dish) => dish.featured)[0];
+  const promotion = selectPromotions.filter((dish) => dish.featured)[0];
+  const leader = selectLeader.filter((dish) => dish.featured)[0];
 
   return (
     <div className="container">
@@ -52,10 +60,10 @@ console.log(selectDishApi)
           {isLoading ? <Loading /> : <RenderCard item={dish} />}
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={promotion} />
+          {isLoading ? <Loading /> : <RenderCard item={promotion} />}
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={leader} />
+          {isLoading ? <Loading /> : <RenderCard item={leader} />}
         </div>
       </div>
     </div>

@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchByParams } from "../../userApi/fetchByParams";
 
 //crate thunk
-export const fetchData = createAsyncThunk(
-  "GETDATAAPI/FETCHDATA",
+export const fetchDishes = createAsyncThunk(
+  "GETDATAAPI/FETCHDISHES",
   async (params, thunkApi) => {
     const response = await fetchByParams(params);
     return response;
@@ -11,33 +11,33 @@ export const fetchData = createAsyncThunk(
 );
 
 //crate slice
-const getDataApi = createSlice({
+const getDishes = createSlice({
   name: "GETDATAAPI",
   initialState: {
-    promotions: {
+    dishes: {
       isLoading: false,
-      promotions: [],
+      dishes: [],
       errMess: null,
     },
   },
   reducers: {},
   extraReducers: {
-    [fetchData.fulfilled]: (state, action) => {
-      state.promotions = {
+    [fetchDishes.fulfilled]: (state, action) => {
+      state.dishes = {
         isLoading: false,
         errMess: null,
-        promotions: action.payload,
+        dishes: action.payload,
       };
     },
-    [fetchData.pending]: (state, action) => {
-      state.promotions = {
+    [fetchDishes.pending]: (state, action) => {
+      state.dishes = {
         isLoading: true,
         errMess: null,
-        promotions: [],
+        dishes: [],
       };
     },
-    [fetchData.rejected]: (state, action) => {
-      state.promotions = {
+    [fetchDishes.rejected]: (state, action) => {
+      state.dishes = {
         isLoading: false,
         errMess: action.payload,
       };
@@ -46,5 +46,5 @@ const getDataApi = createSlice({
 });
 
 //export
-export const { reducer: getDataApiReducer } = getDataApi;
-export default getDataApiReducer;
+export const { reducer: getDishesReducer } = getDishes;
+export default getDishesReducer;

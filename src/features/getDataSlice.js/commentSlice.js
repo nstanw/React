@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchByParams } from "../../userApi/fetchByParams";
 
 //crate thunk
-export const fetchData = createAsyncThunk(
-  "GETDATAAPI/FETCHDATA",
+export const fetchComment = createAsyncThunk(
+  "GETCommentAPI/FETCHComment",
   async (params, thunkApi) => {
     const response = await fetchByParams(params);
     return response;
@@ -11,8 +11,8 @@ export const fetchData = createAsyncThunk(
 );
 
 //crate slice
-const getDataApi = createSlice({
-  name: "GETDATAAPI",
+const getCommentApi = createSlice({
+  name: "GETCommentAPI",
   initialState: {
     promotions: {
       isLoading: false,
@@ -22,21 +22,21 @@ const getDataApi = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [fetchData.fulfilled]: (state, action) => {
+    [fetchComment.fulfilled]: (state, action) => {
       state.promotions = {
         isLoading: false,
         errMess: null,
         promotions: action.payload,
       };
     },
-    [fetchData.pending]: (state, action) => {
+    [fetchComment.pending]: (state, action) => {
       state.promotions = {
         isLoading: true,
         errMess: null,
         promotions: [],
       };
     },
-    [fetchData.rejected]: (state, action) => {
+    [fetchComment.rejected]: (state, action) => {
       state.promotions = {
         isLoading: false,
         errMess: action.payload,
@@ -46,5 +46,5 @@ const getDataApi = createSlice({
 });
 
 //export
-export const { reducer: getDataApiReducer } = getDataApi;
-export default getDataApiReducer;
+export const { reducer: getCommentApiReducer } = getCommentApi;
+export default getCommentApiReducer;
