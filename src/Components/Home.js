@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import { fetchData } from "../features/getDataSlice.js/promosSlice";
 import { getDishesThunk } from "../features/mainSlice";
 import Loading from "./Loading";
 
@@ -30,12 +31,16 @@ function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDishesThunk());
+    dispatch(fetchData("dishes"));
   }, []);
-  
-    const selectShares = useSelector((state) => state.main);
 
-    const isLoading = selectShares.status.isLoading;
+  const selectShares = useSelector((state) => state.main);
 
+  const isLoading = selectShares.status.isLoading;
+
+  //selec state in json-server
+  const selectDishApi = useSelector((state) => state.getData);
+console.log(selectDishApi)
   const dish = selectShares.dishes.filter((dish) => dish.featured)[0];
   const promotion = selectShares.promotions.filter((dish) => dish.featured)[0];
   const leader = selectShares.leaders.filter((dish) => dish.featured)[0];
@@ -44,7 +49,7 @@ function Home() {
     <div className="container">
       <div className="row align-items-start">
         <div className="col-12 col-md m-1">
-         {isLoading?  <Loading /> : <RenderCard item={dish} />}
+          {isLoading ? <Loading /> : <RenderCard item={dish} />}
         </div>
         <div className="col-12 col-md m-1">
           <RenderCard item={promotion} />
