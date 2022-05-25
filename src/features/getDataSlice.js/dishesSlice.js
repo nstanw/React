@@ -15,6 +15,7 @@ const getDishes = createSlice({
   name: "GET_DISHES_API",
   initialState: {
     dishes: {
+      isErr: true,
       isLoading: false,
       dishes: [],
       errMess: null,
@@ -24,6 +25,7 @@ const getDishes = createSlice({
   extraReducers: {
     [fetchDishes.fulfilled]: (state, action) => {
       state.dishes = {
+        isErr: false,
         isLoading: false,
         errMess: null,
         dishes: action.payload,
@@ -31,6 +33,7 @@ const getDishes = createSlice({
     },
     [fetchDishes.pending]: (state, action) => {
       state.dishes = {
+        isErr: false,
         isLoading: true,
         errMess: null,
         dishes: [],
@@ -38,8 +41,9 @@ const getDishes = createSlice({
     },
     [fetchDishes.rejected]: (state, action) => {
       state.dishes = {
+        isErr: true,
         isLoading: false,
-        errMess: action.payload,
+        errMess: action.error,
       };
     },
   },

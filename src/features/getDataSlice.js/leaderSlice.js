@@ -1,12 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchByParams } from "../../userApi/fetchByParams";
+import { baseUrl } from "../baseUrl";
 
 //crate thunk
 export const fetchLeader = createAsyncThunk(
   "GETDATAAPI/FETCHLEADER",
-  async (params, thunkApi) => {
-    const response = await fetchByParams(params);
-    return response;
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = fetch(baseUrl + "params").then((res) => res.json());
+      console.log("response", response);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.console());
+    }
   }
 );
 
@@ -15,6 +21,7 @@ const getDataApi = createSlice({
   name: "GETDATAAPI",
   initialState: {
     leader: {
+      isErr: true,
       isLoading: false,
       leader: [],
       errMess: null,
@@ -24,6 +31,7 @@ const getDataApi = createSlice({
   extraReducers: {
     [fetchLeader.fulfilled]: (state, action) => {
       state.leader = {
+        isErr: false,
         isLoading: false,
         errMess: null,
         leader: action.payload,
@@ -31,6 +39,7 @@ const getDataApi = createSlice({
     },
     [fetchLeader.pending]: (state, action) => {
       state.leader = {
+        isErr: false,
         isLoading: true,
         errMess: null,
         leader: [],
@@ -38,6 +47,7 @@ const getDataApi = createSlice({
     },
     [fetchLeader.rejected]: (state, action) => {
       state.leader = {
+        isErr: true,
         isLoading: false,
         errMess: action.payload,
       };

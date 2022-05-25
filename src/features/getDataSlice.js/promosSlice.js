@@ -15,6 +15,7 @@ const getDataApi = createSlice({
   name: "GETDATAAPI",
   initialState: {
     promotions: {
+      isErr: true,
       isLoading: false,
       promotions: [],
       errMess: null,
@@ -24,6 +25,7 @@ const getDataApi = createSlice({
   extraReducers: {
     [fetchData.fulfilled]: (state, action) => {
       state.promotions = {
+        isErr: false,
         isLoading: false,
         errMess: null,
         promotions: action.payload,
@@ -31,6 +33,7 @@ const getDataApi = createSlice({
     },
     [fetchData.pending]: (state, action) => {
       state.promotions = {
+        isErr: false,
         isLoading: true,
         errMess: null,
         promotions: [],
@@ -38,6 +41,7 @@ const getDataApi = createSlice({
     },
     [fetchData.rejected]: (state, action) => {
       state.promotions = {
+        isErr: true,
         isLoading: false,
         errMess: action.payload,
       };

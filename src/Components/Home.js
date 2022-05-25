@@ -14,21 +14,6 @@ import { fetchLeader } from "../features/getDataSlice.js/leaderSlice";
 import { fetchData } from "../features/getDataSlice.js/promosSlice";
 import Loading from "./Loading";
 
-function RenderCard({ item }) {
-  return (
-    <Card>
-      <CardImg src={baseUrl + item.image} alt={item.name} />
-      <CardBody>
-        <CardTitle>{item.name}</CardTitle>
-        {item.designation ? (
-          <CardSubtitle>{item.designation}</CardSubtitle>
-        ) : null}
-        <CardText>{item.description}</CardText>
-      </CardBody>
-    </Card>
-  );
-}
-
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -37,36 +22,106 @@ function Home() {
     dispatch(fetchLeader("leaders"));
   }, []);
 
-  const selectShares = useSelector((state) => state.main);
-
-  const isLoading = selectShares.status.isLoading;
-
-  //selec state in json-server
-  const selectPromotions = useSelector(
-    (state) => state.getData.promotions.promotions
+  //isloading
+  const isLoadingDishes = useSelector(
+    (state) => state.getDishes.dishes.isLoading
   );
-  const selectDishes = useSelector((state) => state.getDishes.dishes.dishes);
-  const selectLeader = useSelector((state) => state.getLeader.leader.leader);
+  const isLoadingLeader = useSelector(
+    (state) => state.getLeader.leader.isLoading
+  );
+  const isLoadingPromotion = useSelector(
+    (state) => state.getData.promotions.isLoading
+  );
 
-  const dish = selectDishes.filter((dish) => dish.featured)[0];
-  const promotion = selectPromotions.filter((dish) => dish.featured)[0];
-  const leader = selectLeader.filter((dish) => dish.featured)[0];
+  //is err
+  const isErrDishes = useSelector((state) => state.getDishes.dishes.isErr);
+  const isErrPromo = useSelector((state) => state.getData.promotions.isErr);
+  const isErrLeader = useSelector((state) => state.getLeader.leader.isErr);
+
+  //data in api
+  var selectListDish = useSelector((state) => state.getDishes.dishes);
+  var selectListPromo = useSelector((state) => state.getData.promotions);
+  var selectListLeader = useSelector((state) => state.getLeader.leader);
+
+  //check err
+  if (isErrDishes) {
+    var error = selectListDish.errMess;
+  } else {
+    var dish = selectListDish.dishes[0];
+  }
+  if (isErrPromo) {
+    var errorPromo = selectListPromo.errMess;
+  } else {
+    var promotion = selectListPromo.promotions[0];
+  }
+  if (isErrLeader) {
+    var errorLeader = selectListLeader.errMess;
+  } else {
+    var leader = selectListLeader.leader[0];
+  }
+
+  //message error getDishes.dishes.dishes[0]
 
   return (
     <div className="container">
       <div className="row align-items-start">
         <div className="col-12 col-md m-1">
-          {isLoading ? <Loading /> : <RenderCard item={dish} />}
+          {isLoadingDishes ? (
+            <Loading />
+          ) : isErrDishes ? (
+            <RenderError error={error} />
+          ) : (
+            <RenderCard item={dish} />
+          )}
         </div>
         <div className="col-12 col-md m-1">
-          {isLoading ? <Loading /> : <RenderCard item={promotion} />}
+          {isLoadingPromotion ? (
+            <Loading />
+          ) : isErrPromo ? (
+            <RenderError error={errorPromo} />
+          ) : (
+            <RenderCard item={promotion} />
+          )}
         </div>
         <div className="col-12 col-md m-1">
-          {isLoading ? <Loading /> : <RenderCard item={leader} />}
+          {isLoadingLeader ? (
+            <Loading />
+          ) : isErrLeader ? (
+            <RenderError error={errorLeader} />
+          ) : (
+            <RenderCard item={leader} />
+          )}
         </div>
       </div>
     </div>
   );
 }
+function RenderCard({ item }) {
+  try {
+    return (
+      <Card>
+        <CardImg src={baseUrl + item.image} alt={item.name} />
+        <CardBody>
+          <CardTitle>{item.name}</CardTitle>
+          {item.designation ? (
+            <CardSubtitle>{item.designation}</CardSubtitle>
+          ) : null}
+          <CardText>{item.description}</CardText>
+        </CardBody>
+      </Card>
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
 
+function RenderError({ error }) {
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle>loi</CardTitle>
+      </CardBody>
+    </Card>
+  );
+}
 export default Home;
