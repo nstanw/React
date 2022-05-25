@@ -6,14 +6,13 @@ import { baseUrl } from "../baseUrl";
 export const fetchLeader = createAsyncThunk(
   "GETDATAAPI/FETCHLEADER",
   async (params, { rejectWithValue }) => {
-    try {
-      const response = fetch(baseUrl + "params").then((res) => res.json());
+
+      const response = fetch(baseUrl + "params").then((res) => res.json()).then().catch(error => error);
       console.log("response", response);
+    
       return response;
-    } catch (error) {
-      return rejectWithValue(error.console());
-    }
   }
+  
 );
 
 //crate slice
