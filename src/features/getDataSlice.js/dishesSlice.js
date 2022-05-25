@@ -6,7 +6,9 @@ export const fetchDishes = createAsyncThunk(
   "GET_DISHES_API/FETCH_DISHES",
   async (params, thunkApi) => {
     const response = await fetchByParams(params);
+    
     return response;
+    
   }
 );
 

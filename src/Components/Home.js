@@ -97,7 +97,7 @@ function Home() {
   );
 }
 function RenderCard({ item }) {
-  try {
+
     return (
       <Card>
         <CardImg src={baseUrl + item.image} alt={item.name} />
@@ -110,16 +110,15 @@ function RenderCard({ item }) {
         </CardBody>
       </Card>
     );
-  } catch (error) {
-    console.log(error);
-  }
+ 
 }
 
 function RenderError({ error }) {
+  console.log("error bat:", error)
   return (
     <Card>
       <CardBody>
-        <CardTitle>loi</CardTitle>
+        <CardTitle>{error}</CardTitle>
       </CardBody>
     </Card>
   );

@@ -7,8 +7,25 @@ export const fetchLeader = createAsyncThunk(
   "GETDATAAPI/FETCHLEADER",
   async (params, { rejectWithValue }) => {
 
-      const response = fetch(baseUrl + "params").then((res) => res.json()).then().catch(error => error);
-      console.log("response", response);
+      const response = fetch(baseUrl + "params")
+      .then(res => {
+        if (res.statusText === "OK") {
+          return res;
+          
+        } else {
+          var error = new  Error(
+            `Error ${res.status} : ${res.statusText}`
+          );
+
+          error.res = res;
+          console.log("response bat loi",res)
+          throw error;
+        }
+      })
+      // .then((res)=>{
+        
+      // }).catch()
+       console.log("response", response);
     
       return response;
   }
@@ -48,7 +65,7 @@ const getDataApi = createSlice({
       state.leader = {
         isErr: true,
         isLoading: false,
-        errMess: action.payload,
+        errMess: action.error.message,
       };
     },
   },
