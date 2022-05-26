@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchByParams } from "../../userApi/fetchByParams";
+import * as searchService from "../../apiServices/searchService";
 
 //crate thunk
 export const fetchComment = createAsyncThunk(
   "GET_Comment_API/FETCH_Comment",
   async (params, thunkApi) => {
-    const response = await fetchByParams(params);
+    const response = await searchService.search(params);
     return response;
   }
 );
@@ -15,6 +15,7 @@ const getCommentApi = createSlice({
   name: "GET_CommentAPI",
   initialState: {
     comment: {
+      isErr: false,
       isLoading: true,
       comment: [],
       errMess: null,
@@ -24,26 +25,25 @@ const getCommentApi = createSlice({
   extraReducers: {
     [fetchComment.fulfilled]: (state, action) => {
       state.comment = {
+        isErr: false,
         isLoading: false,
         errMess: null,
-        comment: {
-          ...action.payload,
-          id: action.payload.length,
-          date: new Date().toISOString(),
-        },
+        comment:action.payload,
       };
     },
     [fetchComment.pending]: (state, action) => {
       state.comment = {
+        isErr: false,
         isLoading: true,
         errMess: null,
         comment: [],
       };
     },
     [fetchComment.rejected]: (state, action) => {
-      state.promotions = {
+      state.comment = {
+        isErr: true,
         isLoading: false,
-        errMess: action.payload,
+        errMess: action.error.message,
       };
     },
   },

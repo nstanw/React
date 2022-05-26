@@ -23,38 +23,18 @@ import Loading from "./Loading";
 import { fetchComment } from "../features/getDataSlice.js/commentSlice";
 import { fetchDishes } from "../features/getDataSlice.js/dishesSlice";
 import { baseUrl } from "../features/baseUrl";
+import RenderError from "./noiticeError";
 
-function RenderDish({ dish }) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchComment("comments"));
-  }, []);
-
-  console.log(dish);
-
-  const selectComments = useSelector((state) => state.getComment.comment);
-
-  const isLoading = selectComments.comment.isLoading;
-  //check loading
-  if (isLoading) {
-    //if true return loading
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  } else {
-    //if fasle return dish
-    return (
-      <Card>
-        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-        <CardBody>
-          <CardTitle>{dish.name}</CardTitle>
-          <CardText>{dish.description}</CardText>
-        </CardBody>
-      </Card>
-    );
-  }
+function RenderDish({ dish, error }) {
+  return (
+    <Card>
+      <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+      <CardBody>
+        <CardTitle>{dish.name}</CardTitle>
+        <CardText>{dish.description}</CardText>
+      </CardBody>
+    </Card>
+  );
 }
 
 function CommentForm() {
@@ -171,14 +151,12 @@ function CommentForm() {
     </div>
   );
 }
-function RenderComments() {
-  const stateComment = useSelector((state) => state.main.comments);
-
+function RenderComments({ listComments }) {
   return (
     <div>
       <h4>Comment</h4>
       <ul>
-        {stateComment.map((comment) => {
+        {listComments.map((comment) => {
           return (
             <div key={comment.id}>
               <li>
@@ -206,16 +184,37 @@ const DishDetail = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchDishes("dishes"));
+    dispatch(fetchComment("comment"));
   }, []);
 
   //get dishes in store
-  const selecDishes = useSelector((state) => state.getDishes.dishes.dishes);
+  const selecDishes = useSelector((state) => state.getDishes.dishes);
+  const selecComments = useSelector((state) => state.getComment.comment);
+  const listComments = selecComments.comment;
+
+  //isLoading Dish & errr
+  const isLoadingDish = selecDishes.isLoading;
+  const isErrDish = selecDishes.isErr;
+  const errMessDish = selecDishes.errMess;
+
+  const isLoadingComment = selecComments.isLoading;
+  const isErrComment = selecComments.isErr;
+  const errMessComment = selecComments.errMess;
+
   //get params router
   const params = useParams();
   const dishId = parseInt(params.dishId, 10);
+  if (isErrDish) {
+    var errorDish = selecDishes.errMess;
 
-  //filter dish
-  const dish = selecDishes.filter((dishh) => dishh.id === dishId)[0];
+    var dish = {
+      error: errorDish,
+      name: "error",
+    };
+  } else {
+    //filter dish
+    var dish = selecDishes.dishes.filter((dishh) => dishh.id === dishId)[0];
+  }
 
   if (dish != null)
     return (
@@ -225,20 +224,45 @@ const DishDetail = () => {
             <BreadcrumbItem>
               <Link to="/menu">Menu</Link>
             </BreadcrumbItem>
-            <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+            {isLoadingDish ? (
+              <BreadcrumbItem active></BreadcrumbItem>
+            ) : (
+              <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+            )}
           </Breadcrumb>
-
-          <div className="col-12">
-            <h3>{dish.name}</h3>
-            <hr />
-          </div>
+          {isLoadingDish ? (
+            <Loading />
+          ) : isErrDish ? (
+            <div className="col-12">
+              <h3>{errMessDish}</h3>
+              <hr />
+            </div>
+          ) : (
+            <div className="col-12">
+              <h3>{dish.name}</h3>
+              <hr />
+            </div>
+          )}
         </div>
         <div className="row">
           <div className="col-12 col-md-5 m-1">
-            <RenderDish dish={dish} />
+            {isLoadingDish ? (
+              <Loading />
+            ) : isErrDish ? (
+              <RenderError error={errMessDish} />
+            ) : (
+              <RenderDish dish={dish} />
+            )}
           </div>
           <div className="col-12 col-md-5 m-1">
-            {<RenderComments />}
+            {isLoadingComment ? (
+              <Loading />
+            ) : isErrComment ? (
+              <RenderError error={errMessComment} />
+            ) : (
+              <RenderComments listComments={listComments} />
+            )}
+
             <CommentForm />
           </div>
         </div>

@@ -43,7 +43,7 @@ const getDataApi = createSlice({
       state.promotions = {
         isErr: true,
         isLoading: false,
-        errMess: action.payload,
+        errMess: action.error.message,
       };
     },
   },

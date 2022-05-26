@@ -4,6 +4,7 @@ import Footer from "./Components/Footer";
 import Home from "./Components/Home";
 import Menu from "./Components/Menu";
 import Contact from "./Components/Contact";
+import About from "./Components/About";
 import DishDetail from "./Components/DishDetail";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/aboutus" element={< About />} />
           <Route path="/menu" element={<Menu />} />
           <Route path='/menu/:dishId' element={ <DishDetail /> } />
           <Route path="/contactus" element={<Contact />} />

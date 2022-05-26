@@ -17,7 +17,6 @@ import Loading from "./Loading";
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
-
     dispatch(fetchData("promotions"));
     dispatch(fetchDishes("dishes"));
     dispatch(fetchLeader("leaders"));
@@ -52,6 +51,7 @@ function Home() {
   }
   if (isErrPromo) {
     var errorPromo = selectListPromo.errMess;
+    console.log("error errorPromo", errorPromo);
   } else {
     var promotion = selectListPromo.promotions[0];
   }
@@ -60,8 +60,6 @@ function Home() {
   } else {
     var leader = selectListLeader.leader[0];
   }
-
-  //message error getDishes.dishes.dishes[0]
 
   return (
     <div className="container">
@@ -98,24 +96,21 @@ function Home() {
   );
 }
 function RenderCard({ item }) {
-
-    return (
-      <Card>
-        <CardImg src={baseUrl + item.image} alt={item.name} />
-        <CardBody>
-          <CardTitle>{item.name}</CardTitle>
-          {item.designation ? (
-            <CardSubtitle>{item.designation}</CardSubtitle>
-          ) : null}
-          <CardText>{item.description}</CardText>
-        </CardBody>
-      </Card>
-    );
- 
+  return (
+    <Card>
+      <CardImg src={baseUrl + item.image} alt={item.name} />
+      <CardBody>
+        <CardTitle>{item.name}</CardTitle>
+        {item.designation ? (
+          <CardSubtitle>{item.designation}</CardSubtitle>
+        ) : null}
+        <CardText>{item.description}</CardText>
+      </CardBody>
+    </Card>
+  );
 }
 
 function RenderError({ error }) {
-  console.log("error bat:", error)
   return (
     <Card>
       <CardBody>

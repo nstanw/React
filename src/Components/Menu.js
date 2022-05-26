@@ -34,19 +34,24 @@ const Menu = (props) => {
 
   const selectDishes = useSelector((state) => state.getDishes.dishes);
 
-  const isLoading = selectDishes.dishes.isLoading;
-
-  const menu = selectDishes.dishes.map((dish) => {
-    return (
-      <div className="col-12 col-md-5 m-1" key={dish.id}>
-        {isLoading ? (
+  const isLoading = selectDishes.isLoading;
+  if (isLoading) {
+    var menu = selectDishes.dishes.map((dish) => {
+      return (
+        <div className="col-12 col-md-5 m-1" key={dish.id}>
           <Loading />
-        ) : (
-          <RenderMenuItem dish={dish} onClick={props.onClick} />
-        )}
-      </div>
-    );
-  });
+        </div>
+      );
+    });
+  } else {
+    var menu = selectDishes.dishes.map((dish) => {
+      return (
+        <div className="col-12 col-md-5 m-1" key={dish.id}>
+          <RenderMenuItem dish={dish} />
+        </div>
+      );
+    });
+  }
 
   return (
     <div className="container menu">
@@ -58,7 +63,7 @@ const Menu = (props) => {
           <BreadcrumbItem active>Menu</BreadcrumbItem>
         </Breadcrumb>
         <div className="col-12">
-          <h3>{menu}</h3>
+          {menu}
           <hr />
         </div>
       </div>
