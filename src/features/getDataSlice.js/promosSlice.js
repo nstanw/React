@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchByParams } from "../../userApi/fetchByParams";
+import * as searchService from "../../apiServices/searchService";
 
 //crate thunk
 export const fetchData = createAsyncThunk(
   "GETDATAAPI/FETCHDATA",
   async (params, thunkApi) => {
-    const response = await fetchByParams(params);
+    const response = await searchService.search(params);
     return response;
   }
 );

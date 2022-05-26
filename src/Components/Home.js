@@ -17,6 +17,7 @@ import Loading from "./Loading";
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
+
     dispatch(fetchData("promotions"));
     dispatch(fetchDishes("dishes"));
     dispatch(fetchLeader("leaders"));

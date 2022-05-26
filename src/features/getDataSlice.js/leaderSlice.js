@@ -1,35 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchByParams } from "../../userApi/fetchByParams";
-import { baseUrl } from "../baseUrl";
+import * as searchService from "../../apiServices/searchService";
 
 //crate thunk
 export const fetchLeader = createAsyncThunk(
   "GETDATAAPI/FETCHLEADER",
   async (params, { rejectWithValue }) => {
-
-      const response = fetch(baseUrl + "params")
-      .then(res => {
-        if (res.statusText === "OK") {
-          return res;
-          
-        } else {
-          var error = new  Error(
-            `Error ${res.status} : ${res.statusText}`
-          );
-
-          error.res = res;
-          console.log("response bat loi",res)
-          throw error;
-        }
-      })
-      // .then((res)=>{
-        
-      // }).catch()
-       console.log("response", response);
-    
-      return response;
+    const result = await searchService.search(params);
+    return result;
   }
-  
 );
 
 //crate slice

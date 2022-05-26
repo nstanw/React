@@ -27,7 +27,7 @@ function App() {
           <Route path='/menu/:dishId' element={ <DishDetail /> } />
           <Route path="/contactus" element={<Contact />} />
           {/* 404 */}
-          <Route path="/" element={<Navigate replace to="/Home" />} />
+          <Route path="*" element={<Navigate replace to="/Home" />} />
         </Routes>
         <Footer />
       </div>
