@@ -46,7 +46,7 @@ const Menu = (props) => {
   } else {
     var menu = selectDishes.dishes.map((dish) => {
       return (
-        <div className="col-12 col-md-5 m-1" key={dish.id}>
+        <div className="col-md-5 m-1" key={dish.id}>
           <RenderMenuItem dish={dish} />
         </div>
       );
@@ -62,7 +62,7 @@ const Menu = (props) => {
           </BreadcrumbItem>
           <BreadcrumbItem active>Menu</BreadcrumbItem>
         </Breadcrumb>
-        <div className="col-12">
+        <div className="row col-12">
           {menu}
           <hr />
         </div>
