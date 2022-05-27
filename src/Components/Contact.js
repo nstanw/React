@@ -112,8 +112,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="col-12">
+        <div className="col-12">
         <h3>Send us your Feedback</h3>
       </div>
       <div className="col-12 col-md-9">
@@ -295,6 +294,9 @@ const Contact = () => {
           </Row>
         </Form>
       </div>
+      </div>
+
+     
     </div>
   );
 };
