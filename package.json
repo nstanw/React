@@ -13,6 +13,7 @@
     "cross-fetch": "^3.1.5",
     "font-awesome": "^4.7.0",
     "json-server": "^0.17.0",
+    "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.1",
@@ -48,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-animation-components": "^3.0.0"
   }
 }
