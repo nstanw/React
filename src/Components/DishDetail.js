@@ -18,9 +18,11 @@ import {
 import { actions, Control, Errors, Form } from "react-redux-form";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addComment } from "../features/mainSlice";
 import Loading from "./Loading";
-import { fetchComment } from "../features/getDataSlice.js/commentSlice";
+import {
+  fetchComment,
+  postCommentApi,
+} from "../features/getDataSlice.js/commentSlice";
 import { fetchDishes } from "../features/getDataSlice.js/dishesSlice";
 import { baseUrl } from "../features/baseUrl";
 import RenderError from "./noiticeError";
@@ -39,7 +41,9 @@ function RenderDish({ dish, error }) {
 
 function CommentForm() {
   const Dispatch = useDispatch();
-  const stateComments = useSelector((state) => state.main.comments);
+  const listCommentServer = useSelector(
+    (state) => state.getComment.comment.comment
+  );
   const [postComment, setPostComment] = useState({
     date: "",
     author: "",
@@ -47,26 +51,26 @@ function CommentForm() {
     comment: "",
     rating: "",
   });
-
+  
+  const params = useParams();
   const handleSubmitComment = (values, e) => {
-    Dispatch(actions.reset("feedback"));
-
+    const dishId = parseInt(params.dishId, 10);
     //update post commet
     postComment.date = new Date().toISOString();
     postComment.author = values.yourname;
-    postComment.id = stateComments.length;
+    postComment.id = listCommentServer.length;
     postComment.comment = values.comment;
     postComment.rating = values.rating;
-    //  dishId = 0;
-
-    //update state
-    setPostComment(postComment);
+    postComment.dishId = dishId;
 
     //dispatch action add comment
-    Dispatch(addComment(postComment));
-    //dispatch action to reset form
-    // setIsModalOpen(!isModalOpen);
+    Dispatch(postCommentApi(postComment));
 
+    //dispatch action to reset form
+    setIsModalOpen(!isModalOpen);
+    Dispatch(actions.reset("feedback"));
+    
+    setPostComment(postComment);
     e.preventDefault();
   };
 
@@ -152,11 +156,16 @@ function CommentForm() {
   );
 }
 function RenderComments({ listComments }) {
+  const params = useParams();
+  const dishID = parseInt(params.dishId, 10);
+  const DishComment = listComments.filter(
+    (comment) => comment.dishId === dishID
+  );
   return (
     <div>
       <h4>Comment</h4>
       <ul>
-        {listComments.map((comment) => {
+        {DishComment.map((comment) => {
           return (
             <div key={comment.id}>
               <li>
@@ -184,7 +193,7 @@ const DishDetail = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchDishes("dishes"));
-    dispatch(fetchComment("comment"));
+    dispatch(fetchComment("comments"));
   }, []);
 
   //get dishes in store

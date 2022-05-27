@@ -2,7 +2,6 @@ import axios from "axios";
 
 const request = axios.create({
   baseURL: "http://localhost:3001/",
-  timeout:2000,
 });
 
 export const get = async (path, options = {}) => {
@@ -10,4 +9,8 @@ export const get = async (path, options = {}) => {
   return response.data;
 };
 
+export const post = async (path, data)=>{
+  const response = await request.post(path, data);
+  return response.data;
+}
 export default request;
