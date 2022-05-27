@@ -13,7 +13,7 @@ export const fetchComment = createAsyncThunk(
 export const postCommentApi = createAsyncThunk(
   "Comment_API/Post_Comment",
   async (newComment) => {
-    const response = await searchService.postComment("comment", newComment).catch(error => alert(error));
+    const response = await searchService.postComment("comments", newComment).catch(error => alert(error));
     console.log("response cmt:" ,response);
     return response;
   }
@@ -78,6 +78,7 @@ const getCommentApi = createSlice({
         errMess: null,
         comment:action.payload,
       };
+      state.comment.comment.push(action.payload);
     },
     [postCommentApi.rejected]: (state, action) => {
       state.newComment = {

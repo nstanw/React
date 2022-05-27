@@ -27,7 +27,7 @@ import { fetchDishes } from "../features/getDataSlice.js/dishesSlice";
 import { baseUrl } from "../features/baseUrl";
 import RenderError from "./noiticeError";
 
-function RenderDish({ dish, error }) {
+function RenderDish({ dish }) {
   return (
     <Card>
       <CardImg top src={baseUrl + dish.image} alt={dish.name} />
